@@ -1,4 +1,4 @@
-from telegram.ext import Updater
+from telegram.ext import Updater, CommandHandler
 
 def main():
     # Gestiona la comunicacion entre nuestro bot y telegram, 
@@ -9,7 +9,7 @@ def main():
     # Necesita un token que hay que pedirselo al boot father 
     # de Telegram e introducirlo en este comando con comillas.
     # /start -> /newbot
-    updater = Updater(token=open('./bot_token').read(), use_context=True)
+    updater = Updater(token=open('./lucia_geeksbot').read(), use_context=True)
 
     # Reparte el trabajo entre los manejadores (componentes que
     # se encargan de reacionar ante los comandos de telegram)
@@ -43,7 +43,7 @@ def repite(update,context):
 
 # Recibir comando y sumar
 def suma (update,context):
-    # args = [2, 2] -> # + #
+    # args = [2, 2]
     resultado = int(context.args[0]) + int(context.args[1])
     update.message.reply_text("El resultado es " + str(resultado))
 

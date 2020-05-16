@@ -40,13 +40,13 @@ def mover_bola():
     global speed_bola_x, speed_bola_y
 
     # Rebotar abajo y arriba ( + altura de 50) invertir velocidad
-    if bola.top + 50 > screen_height:
+    if bola.top + 25 > screen_height:
         speed_bola_x = -speed_bola_x
     if bola.top < 0:
         speed_bola_x = -speed_bola_x
 
     # Rebotar en la plataforma
-    if bola.left < 10 and rectangulo.top < bola.top < rectangulo.top + 140:
+    if bola.left < 5 and rectangulo.top < bola.top < rectangulo.top + 70:
         speed_bola_y = -speed_bola_y
 
     start_bola()
