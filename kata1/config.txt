@@ -26,4 +26,19 @@ pip install pygame
 # Para Ubuntu
 sudo apt install python3-pygame
 
-# Subir código a git
+# Enlazar repositorio con github
+ Ir a Visual Studio Code y ejecutar ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+ Ir a C:\Users\lucia\.ssh abrir .pub y copiar clave
+ En github:
+ - Crear repositorio
+ - Ir a perfil > Settings y selecionar SSH
+ - Add Key SSH y pegar clave
+ - Ir a repositorios y coger URL de Clone or download
+En consola:
+  - git clone https://url.../example.git
+
+# Subir código a github
+git status
+git add
+git commit -m 'comentario'
+git push
