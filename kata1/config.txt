@@ -1,2 +1,11 @@
-git config --global user.name "luciavicario"
-git config --global user.email "luciavicaguerrero@hotmail.com"
+1. Instalar python
+2. Instalar Git 2.25
+3. Instalar Visual Studio Code
+4. Crear carpeta para las katas
+5. Abrirlo con VSC (File -> OpenFolder)
+6. Crear repositorio de git (git init o 3º icono de visual studio code)
+7. git config --global user.name "luciavicario"
+8. git config --global user.email "luciavicaguerrero@hotmail.com"
+9. Crear carpetas de kata 1 a la 4 con main.py
+10. Hacer un commit
+11. Extra. git log -> ver commits del repositorio (se sale con la q)
