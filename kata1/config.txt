@@ -9,3 +9,21 @@
 9. Crear carpetas de kata 1 a la 4 con main.py
 10. Hacer un commit
 11. Extra. git log -> ver commits del repositorio (se sale con la q)
+
+
+python3 -> interprete de python
+
+# Install librería python-telegram-bot
+python -m pip install --upgrade pip
+pip install python-telegram-bot
+# Para Ubuntu
+sudo apt-get update
+sudo apt-get -y install python3-pip
+pip install python-telegram-bot
+
+# Install librería pygame
+pip install pygame
+# Para Ubuntu
+sudo apt install python3-pygame
+
+# Subir código a git
