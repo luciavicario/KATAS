@@ -1,48 +1,56 @@
 import pygame, sys, time, random
 from pygame.locals import *
 
-#pygame.init()
-#play_surface = pygame.display.set_mode((500, 500))
-#fps = pygame.time.Clock()
+pygame.init()
+play_surface = pygame.display.set_mode((500, 500))
+fps = pygame.time.Clock()
+
+speed = 0
 
 class Snake():
     position = [100,50]
-    body = [[100,50], [90,50],[80,50]]
+    body = [[100,50],[90,50],[80,50]]
     direction = "RIGHT"
     change = direction
 
     # Manejo del pressed [KEYDOWN] de las teclas [K_RIGHT - K_LEFT - K_UP -K_DOWN ]
     def controller(self, event, pygame):
-        
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_UP:
+                self.direction = "UP"
+            if event.key == pygame.K_DOWN:
+                self.direction = "DOWN"
+            if event.key == pygame.K_RIGHT:
+                self.direction = "RIGHT"
+            if event.key == pygame.K_LEFT:
+                self.direction = "LEFT"
+    
     # Controla el cambio de  las direcciones
     # Orientaciones
     # Vertical      -> Movimientos [RIGHT - LEFT]
     # Horizontal    -> Movimientos [UP - DOWN]
     # Incremento del movimiento 
     def changeDirection(self):
-        #
-        #
-        #
-        #
-        #
-        #
-        #
-        #
-
-        #
-        #
-        #
-        #
-        #
-        #
-        #
-        #
-
-        self.body.insert(0, list(self.position))
-
+        if self.direction == "UP":
+            self.position = [self.position[0], self.position[1] - 1]
+            self.body.insert(0, list(self.position))
+            self.body.pop()
+        elif self.direction == "DOWN":
+            self.position = [self.position[0], self.position[1] + 1]
+            self.body.insert(0, list(self.position))
+            self.body.pop()
+        elif self.direction == "LEFT":
+            self.position = [self.position[0] - 1, self.position[1]]
+            self.body.insert(0, list(self.position))
+            self.body.pop()
+        elif self.direction == "RIGHT":
+            self.position = [self.position[0] + 1, self.position[1]]
+            self.body.insert(0, list(self.position))
+            self.body.pop()
+    
 class Game():
     run = True
-    food_pos = 0
+    food_pos = [0,0]
     score = 0
 
     def __init__(self):
@@ -50,47 +58,52 @@ class Game():
 
     # función de salida
     def exit(self, event, pygame):
-        #
-        #
+        if event.type == pygame.QUIT:
+            self.run = False  
     
-    # Posición aleatorio entre el ranto [0,49] * 10  
+    # Posición aleatorio entre el rango [0,49] * 10  
     def food_spawn(self):
-        self.food_pos = 0
+        self.food_pos[0] = 10 * random.choice(range(0, 49))
+        self.food_pos[1] = 10 * random.choice(range(0, 49))
 
     # Si colisionas con una fruta, sumas 1
     # Sino decrementas en 1 el body del snake
     def eat(self, snake):
-        #
-        #    
-        #    
-        #
-        #  
+        last_pos = len(snake.body) -1
+        if (self.food_pos[0] - 5 <= snake.position[0] <= self.food_pos[0] + 5) and (self.food_pos[1]-5 <= snake.position[1] <= self.food_pos[1]+5):
+            self.score += 1
+            if snake.body[0][1]<snake.body[last_pos][1]:
+                pos = [snake.body[last_pos][0], snake.body[last_pos][1]+ 10]
+            elif snake.body[0][1]>snake.body[last_pos][1]:
+                pos = [snake.body[last_pos][0], snake.body[last_pos][1]- 10]
+            elif snake.body[0][0]<snake.body[last_pos][0]:
+                pos = [snake.body[last_pos][0] + 10, snake.body[last_pos][1]]
+            elif snake.body[0][0]>snake.body[last_pos][0]:
+                pos = [snake.body[last_pos][0] - 10, snake.body[last_pos][1]]
+            snake.body.append(list(pos))
+            self.food_spawn()
+
+
 
     # Mensajes de salida cuando el snake muere
     # Posición snake[0] >= 500 ó snake[0] <= 0                  -> Muere
     # Posición snake[1] >= 500 ó snake[1] <= 0                  -> Muere
     # Posición del snake choca con sigo mismo menos la cabeza   -> Muere 
     def dead(self, snake):
-        #
-        #
-        #
+        positions = snake.body
+        indices = range(1, len(snake.body) -1)
+        pos_result = [positions[i] for i in indices]
+        for pos in pos_result:
+            if snake.position[0] == pos[0] and snake.position[1] == pos[1]:
+                self.run = False
         
-        #
-        #
-        #
-        
-        #
-        #
-        #
-        
-            
+        if snake.position[0] >= 500 or snake.position[0] <= 0 or snake.position[1] >= 500 or snake.position[1] <= 0:
+            self.run = False
+  
 # Entry Point
 def main():
     # Descomentar para lanzar el juego en local
     # Comentar para validar con el oráculo
-    # pygame.init()
-    # play_surface = pygame.display.set_mode((500, 500))
-    # fps = pygame.time.Clock()
 
     snake = Snake()
     game = Game()
@@ -121,5 +134,5 @@ def main():
 # Comienza la aventura!!!!
 # Descomentar para lanzar el juego en local
 # Comentar para validar con el oráculo
-# main()
-# pygame.quit()
+main()
+pygame.quit()
